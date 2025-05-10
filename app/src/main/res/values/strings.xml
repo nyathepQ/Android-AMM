@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">amm</string>
+    <string name="hint_user">Usuario</string>
+    <string name="hint_pass">Contraseña</string>
+    <string name="btn_ingreso">Ingresar</string>
+    <string name="btn_registro">Registro</string>
+</resources>
