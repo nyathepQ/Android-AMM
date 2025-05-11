@@ -10,6 +10,7 @@ import com.agenda.amm.data.model.Equipo
 import com.agenda.amm.data.model.Servicio
 import com.agenda.amm.data.model.TipoDocumento
 import com.agenda.amm.data.model.TipoLimpieza
+import java.security.MessageDigest
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null, 1) {
 
@@ -98,7 +99,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
             )
         """.trimIndent())
 
-        db.execSQL("INSERT INTO usuario (usuario, contrasena) VALUES ('admin', '1234')")
         db.execSQL("INSERT INTO tipo_limpieza (nombre_tipo) VALUES ('Estandar')")
         db.execSQL("INSERT INTO tipo_limpieza (nombre_tipo) VALUES ('Profunda')")
         db.execSQL("INSERT INTO tipo_limpieza (nombre_tipo) VALUES ('Move IN/OUT')")
@@ -115,7 +115,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         db.execSQL("DROP TABLE IF EXISTS cliente")
         db.execSQL("DROP TABLE IF EXISTS tipo_documento")
         db.execSQL("DROP TABLE IF EXISTS tipo_limpieza")
-        onCreate(db);
+        onCreate(db)
     }
 
     override fun onOpen(db: SQLiteDatabase) {
@@ -123,10 +123,20 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         db.execSQL("PRAGMA foreign_keys=ON;")
     }
     // === Log y Registro ===
+    private fun hashPassword(password: String): String {
+        val bytes = password.toByteArray()
+        val md = MessageDigest.getInstance("SHA-256")
+        val digest = md.digest(bytes)
+        return digest.joinToString("") {
+            "%02x".format(it)
+        }
+    }
+
     fun registroUsuario(usuario: String, contrasena: String): Boolean {
-        val db = readableDatabase
+        val db = writableDatabase
+        val hashedPassword = hashPassword(contrasena)
         // verificar si el usuario ya existe
-        val cursor = db.rawQuery("SELECT * FROM usuario WHERE usuario = ?", arrayOf(usuario))
+        val cursor = db.rawQuery("SELECT * FROM usuarios WHERE usuario = ?", arrayOf(usuario))
         val existe = cursor.moveToFirst()
         cursor.close()
         //si devuelve true, el usuario ya existe
@@ -136,17 +146,18 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         // insertar el usuario si no existe
         val values = ContentValues().apply {
             put("usuario", usuario)
-            put("contrasena", contrasena)
+            put("contrasena", hashedPassword)
         }
-        val resultado = db.insert("usuario", null, values)
+        val resultado = db.insert("usuarios", null, values)
         return resultado != -1L
     }
 
     fun validarIngreso(usuario: String, contrasena: String): Boolean {
         val db = readableDatabase
+        val hashedPassword = hashPassword(contrasena)
         // Buscar en la base de datos un usuario con los datos entregados
-        val cursor = db.rawQuery("SELECT * FROM usuario WHERE usuario = ? AND contrasena = ?", arrayOf(usuario, contrasena))
-        val existe = cursor.count > 0 //Hay elementos ? true : false
+        val cursor = db.rawQuery("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?", arrayOf(usuario, hashedPassword))
+        val existe = cursor.moveToFirst() //Hay elementos ? true : false
         cursor.close()
         return existe
     }
@@ -178,10 +189,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         var tipoLimpieza: TipoLimpieza? = null
         //si existe el registro guardar los valores en la variable
         if(cursor.moveToFirst()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoLimp"))
+            val idLimp = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoLimp"))
             val nombreTipo = cursor.getString(cursor.getColumnIndexOrThrow("nombre_tipo"))
 
-            tipoLimpieza = TipoLimpieza(id, nombreTipo)
+            tipoLimpieza = TipoLimpieza(idLimp, nombreTipo)
         }
         cursor.close()
         return tipoLimpieza
@@ -239,10 +250,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         var tipoDocumento: TipoDocumento? = null
         //si existe el registro guardar los valores en la variable
         if(cursor.moveToFirst()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoDocu"))
+            val idDocu = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoDocu"))
             val nombreTipo = cursor.getString(cursor.getColumnIndexOrThrow("nombre_tipo"))
 
-            tipoDocumento = TipoDocumento(id, nombreTipo)
+            tipoDocumento = TipoDocumento(idDocu, nombreTipo)
         }
         cursor.close()
         return tipoDocumento
@@ -305,7 +316,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         var cliente: Cliente? = null
         //si existe el registro guardar los valores en la variable
         if(cursor.moveToFirst()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id_cliente"))
+            val idClie = cursor.getInt(cursor.getColumnIndexOrThrow("id_cliente"))
             val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre_cliente"))
             val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido_cliente"))
             val direccion = cursor.getString(cursor.getColumnIndexOrThrow("direccion_cliente"))
@@ -313,7 +324,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
             val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo_cliente"))
             val observacion = cursor.getString(cursor.getColumnIndexOrThrow("observacion_cliente"))
 
-            cliente = Cliente(id, nombre, apellido, direccion, telefono, correo, observacion)
+            cliente = Cliente(idClie, nombre, apellido, direccion, telefono, correo, observacion)
         }
         cursor.close()
         return cliente
@@ -386,7 +397,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         var empleado: Empleado? = null
         //si existe el registro guardar los valores en la variable
         if(cursor.moveToFirst()) {
-            val id = cursor.getString(cursor.getColumnIndexOrThrow("id_empleado"))
+            val idEmp = cursor.getString(cursor.getColumnIndexOrThrow("id_empleado"))
             val tipoDocu = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoDocu"))
             val documento = cursor.getString(cursor.getColumnIndexOrThrow("documento_empleado"))
             val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre_empleado"))
@@ -394,7 +405,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
             val telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono_empleado"))
             val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo_empleado"))
 
-            empleado = Empleado(id, tipoDocu, documento, nombre, apellido, telefono, correo)
+            empleado = Empleado(idEmp, tipoDocu, documento, nombre, apellido, telefono, correo)
         }
         cursor.close()
         return empleado
@@ -465,13 +476,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         var equipo: Equipo? = null
         //si existe el registro guardar los valores en la variable
         if(cursor.moveToFirst()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id_equipo"))
+            val idEqu = cursor.getInt(cursor.getColumnIndexOrThrow("id_equipo"))
             val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre_equipo"))
             val lider = cursor.getString(cursor.getColumnIndexOrThrow("lider"))
             val miembro1 = cursor.getString(cursor.getColumnIndexOrThrow("miembro1"))
             val miembro2 = cursor.getString(cursor.getColumnIndexOrThrow("miembro2"))
 
-            equipo = Equipo(id, nombre, lider, miembro1, miembro2)
+            equipo = Equipo(idEqu, nombre, lider, miembro1, miembro2)
         }
         cursor.close()
         return equipo
@@ -543,7 +554,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         var servicio: Servicio? = null
         //si existe el registro guardar los valores en la variable
         if(cursor.moveToFirst()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id_equipo"))
+            val idServ = cursor.getInt(cursor.getColumnIndexOrThrow("id_equipo"))
             val cliente = cursor.getInt(cursor.getColumnIndexOrThrow("id_cliente"))
             val equipo = cursor.getInt(cursor.getColumnIndexOrThrow("id_equipo"))
             val tipoLimpieza = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoLimp"))
@@ -554,7 +565,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
             val precio = cursor.getInt(cursor.getColumnIndexOrThrow("precio"))
             val observacion = cursor.getString(cursor.getColumnIndexOrThrow("observacion_servicio"))
 
-            servicio = Servicio(id, cliente, equipo, tipoLimpieza, fecha, hora, tiempo, finalizacion, precio, observacion)
+            servicio = Servicio(idServ, cliente, equipo, tipoLimpieza, fecha, hora, tiempo, finalizacion, precio, observacion)
         }
         cursor.close()
         return servicio

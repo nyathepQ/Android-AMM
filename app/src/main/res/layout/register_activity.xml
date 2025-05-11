@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/MainLayout">
 
+    <Button
+        android:id="@+id/btnRegresar"
+        style="@style/ButtonAmm"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_regresar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/logoImg"
@@ -16,11 +24,11 @@
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegresar"
         app:shapeAppearanceOverlay="@style/LogoRedondo" />
 
     <FrameLayout
-        android:id="@+id/formLogin"
+        android:id="@+id/formRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -52,47 +60,11 @@
                 style="@style/EditTextInputs"/>
 
             <Button
-                android:id="@+id/btnIngresar"
-                android:layout_marginTop="24dp"
-                android:text="@string/btn_ingreso"
+                android:id="@+id/btnRegistrar"
+                android:layout_marginTop="50dp"
+                android:text="@string/btn_registro"
                 style="@style/ButtonAmm"/>
         </LinearLayout>
     </FrameLayout>
-
-    <Button
-        android:id="@+id/btnRegistrar"
-        style="@style/ButtonAmm"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:text="@string/btn_registro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/formLogin" />
-
-    <ImageView
-        android:id="@+id/facebook_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="53dp"
-        app:layout_constraintEnd_toStartOf="@+id/instagram_url"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistrar"
-        app:srcCompat="@drawable/icons8_facebook_nuevo_50" />
-
-    <ImageView
-        android:id="@+id/instagram_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="124dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/facebook_url"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistrar"
-        app:srcCompat="@drawable/icons8_instagram_50" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

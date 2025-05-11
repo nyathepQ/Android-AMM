@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">amm</string>
+    <string name="title_activity_inicio">Inicio</string>
+    <string name="title_activity_register">Registro</string>
     <string name="hint_user">Usuario</string>
     <string name="hint_pass">Contraseña</string>
     <string name="btn_ingreso">Ingresar</string>
     <string name="btn_registro">Registro</string>
+    <string name="btn_regresar">Regresar</string>
+    <string name="btn_servicios">Servicios</string>
+    <string name="btn_clientes">Clientes</string>
+    <string name="btn_empleados">Empleados</string>
+    <string name="btn_equipos">Equipos</string>
+    <string name="btn_tipos">Tipos</string>
+    <string name="cerrarSes">Cerrar Sesion</string>
 </resources>
