@@ -1,4 +1,4 @@
-package com.agenda.amm
+package com.agenda.amm.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,17 +8,16 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.net.toUri
-import com.agenda.amm.activities.InicioActivity
+import com.agenda.amm.R
 import com.agenda.amm.data.db.DBHelper
-import com.agenda.amm.activities.RegisterActivity
 
-class MainActivity : ComponentActivity() {
+class LoginActivity : ComponentActivity() {
 
     private lateinit var dbHelper: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(R.layout.login_activity)
 
         dbHelper = DBHelper(this)
 

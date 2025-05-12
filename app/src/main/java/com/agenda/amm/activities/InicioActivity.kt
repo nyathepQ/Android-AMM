@@ -5,15 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.ComponentActivity
-import androidx.activity.enableEdgeToEdge
-import com.agenda.amm.MainActivity
 import com.agenda.amm.R
 import androidx.core.content.edit
 
 class InicioActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.inicio_activity)
 
         val prefs = getSharedPreferences("usuario_sesion", MODE_PRIVATE)
@@ -37,13 +34,38 @@ class InicioActivity : ComponentActivity() {
                     prefs.edit { clear() }
 
                     //volver al login
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 }
                 .setNegativeButton("Cancelar", null)
                 .show()
+        }
+
+        btnServicios.setOnClickListener {
+            val intent = Intent(this, ServiciosActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnClientes.setOnClickListener {
+            val intent = Intent(this, ClientesActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnEmpleados.setOnClickListener {
+            val intent = Intent(this, EmpleadosActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnEquipos.setOnClickListener {
+            val intent = Intent(this, EquiposActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnTipos.setOnClickListener {
+            val intent = Intent(this, TiposActivity::class.java)
+            startActivity(intent)
         }
     }
 }

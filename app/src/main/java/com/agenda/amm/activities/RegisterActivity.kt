@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
-import com.agenda.amm.MainActivity
 import com.agenda.amm.R
 import com.agenda.amm.data.db.DBHelper
 
@@ -28,7 +27,7 @@ class RegisterActivity : ComponentActivity() {
         val btnRegresar = findViewById<Button>(R.id.btnRegresar)
 
         btnRegresar.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

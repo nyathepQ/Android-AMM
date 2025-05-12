@@ -2,6 +2,14 @@
     <string name="app_name">amm</string>
     <string name="title_activity_inicio">Inicio</string>
     <string name="title_activity_register">Registro</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_servicios">Servicio</string>
+    <string name="title_activity_clientes">Cliente</string>
+    <string name="title_activity_empleados">Empleado</string>
+    <string name="title_activity_equipos">Equipo</string>
+    <string name="title_activity_tipos">Tipo</string>
+    <string name="faceb">Facebook</string>
+    <string name="instag">Instagram</string>
     <string name="hint_user">Usuario</string>
     <string name="hint_pass">Contraseña</string>
     <string name="btn_ingreso">Ingresar</string>
@@ -13,4 +21,12 @@
     <string name="btn_equipos">Equipos</string>
     <string name="btn_tipos">Tipos</string>
     <string name="cerrarSes">Cerrar Sesion</string>
+    <string name="title_tipo_limp">Tipo Limpieza</string>
+    <string name="title_tipo_docu">Tipo Documento</string>
+    <string name="id">Código</string>
+    <string name="nombre">Nombre</string>
+    <string name="btnBuscar">Buscar</string>
+    <string name="btnCrear">Crear/Modificar</string>
+    <string name="btnMostrar">Mostrar</string>
+    <string name="btnEliminar">Eliminar</string>
 </resources>

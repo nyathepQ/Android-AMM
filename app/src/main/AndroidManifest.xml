@@ -23,13 +23,42 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.Amm" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Amm" />
+        <activity
+            android:name=".activities.ClientesActivity"
+            android:exported="false"
+            android:label="@string/title_activity_clientes"
+            android:theme="@style/Theme.Amm" />
+        <activity
+            android:name=".activities.EmpleadosActivity"
+            android:exported="false"
+            android:label="@string/title_activity_empleados"
+            android:theme="@style/Theme.Amm" />
+        <activity
+            android:name=".activities.EquiposActivity"
+            android:exported="false"
+            android:label="@string/title_activity_equipos"
+            android:theme="@style/Theme.Amm" />
+        <activity
+            android:name=".activities.ServiciosActivity"
+            android:exported="false"
+            android:label="@string/title_activity_servicios"
+            android:theme="@style/Theme.Amm" />
+        <activity
+            android:name=".activities.TiposActivity"
+            android:exported="false"
+            android:label="@string/title_activity_tipos"
+            android:theme="@style/Theme.Amm" />
+        <activity
+            android:name=".SplashActivty"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Amm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
