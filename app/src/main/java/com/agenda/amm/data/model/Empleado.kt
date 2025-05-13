@@ -1,11 +1,15 @@
 package com.agenda.amm.data.model
 
 data class Empleado (
-    val id_empleado: String,
-    val id_tipoDocu: Int,
-    val documento_empleado: String,
-    val nombre_empleado: String,
-    val apellido_empleado: String,
-    val telefono_empleado: String,
-    val correo_empleado: String
-)
+    val idEmpleado: String,
+    val idTipoDocu: Int,
+    val documentoEmpleado: String,
+    val nombreEmpleado: String,
+    val apellidoEmpleado: String,
+    val telefonoEmpleado: String,
+    val correoEmpleado: String
+) {
+    override fun toString(): String {
+        return "$nombreEmpleado $apellidoEmpleado"
+    }
+}

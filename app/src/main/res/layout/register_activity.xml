@@ -27,44 +27,41 @@
         app:layout_constraintTop_toBottomOf="@+id/btnRegresar"
         app:shapeAppearanceOverlay="@style/LogoRedondo" />
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/formRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
+        android:orientation="vertical"
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoImg">
+        app:layout_constraintTop_toBottomOf="@+id/logoImg"
+        android:padding="16dp">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/formUsername"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_user"
+            android:inputType="text"
+            android:autofillHints="username"
+            style="@style/EditTextInputs"/>
 
-            <EditText
-                android:id="@+id/formUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_user"
-                android:inputType="text"
-                style="@style/EditTextInputs"/>
+        <EditText
+            android:id="@+id/formPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/hint_pass"
+            android:inputType="textPassword"
+            android:autofillHints="password"
+            style="@style/EditTextInputs"/>
 
-            <EditText
-                android:id="@+id/formPass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/hint_pass"
-                android:inputType="textPassword"
-                style="@style/EditTextInputs"/>
-
-            <Button
-                android:id="@+id/btnRegistrar"
-                android:layout_marginTop="50dp"
-                android:text="@string/btn_registro"
-                style="@style/ButtonAmm"/>
-        </LinearLayout>
-    </FrameLayout>
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_marginTop="50dp"
+            android:text="@string/btn_registro"
+            style="@style/ButtonAmm"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

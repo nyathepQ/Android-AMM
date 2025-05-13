@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import androidx.core.database.getStringOrNull
 import com.agenda.amm.data.model.Cliente
 import com.agenda.amm.data.model.Empleado
 import com.agenda.amm.data.model.Equipo
@@ -105,6 +106,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         db.execSQL("INSERT INTO tipo_documento (nombre_tipo) VALUES ('DNI')")
         db.execSQL("INSERT INTO tipo_documento (nombre_tipo) VALUES ('Pasaporte')")
         db.execSQL("INSERT INTO tipo_documento (nombre_tipo) VALUES ('Visa')")
+        db.execSQL("INSERT INTO empleado (id_empleado, id_tipoDocu, documento_empleado, nombre_empleado, apellido_empleado, telefono_empleado, correo_empleado) VALUES ('NA', 1, 'NA', 'NA', 'NA', 'NA', 'NA')")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -182,22 +184,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         return listaTipoLimp
     }
 
-    fun buscarTipoLimp(id: Int): TipoLimpieza? {
-        val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM tipo_limpieza WHERE id_tipoLimp = ?", arrayOf(id.toString()))
-        //crear variable de retorno
-        var tipoLimpieza: TipoLimpieza? = null
-        //si existe el registro guardar los valores en la variable
-        if(cursor.moveToFirst()) {
-            val idLimp = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoLimp"))
-            val nombreTipo = cursor.getString(cursor.getColumnIndexOrThrow("nombre_tipo"))
-
-            tipoLimpieza = TipoLimpieza(idLimp, nombreTipo)
-        }
-        cursor.close()
-        return tipoLimpieza
-    }
-
     fun crearTipoLimp(nombreTipo: String): Boolean {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -243,22 +229,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         return listaTipoDocu
     }
 
-    fun buscarTipoDocu(id: Int): TipoDocumento? {
-        val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM tipo_documento WHERE id_tipoDocu = ?", arrayOf(id.toString()))
-        //crear variable de retorno
-        var tipoDocumento: TipoDocumento? = null
-        //si existe el registro guardar los valores en la variable
-        if(cursor.moveToFirst()) {
-            val idDocu = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoDocu"))
-            val nombreTipo = cursor.getString(cursor.getColumnIndexOrThrow("nombre_tipo"))
-
-            tipoDocumento = TipoDocumento(idDocu, nombreTipo)
-        }
-        cursor.close()
-        return tipoDocumento
-    }
-
     fun crearTipoDocu(nombreTipo: String): Boolean {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -298,7 +268,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
                 val direccion = cursor.getString(cursor.getColumnIndexOrThrow("direccion_cliente"))
                 val telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono_cliente"))
                 val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo_cliente"))
-                val observacion = cursor.getString(cursor.getColumnIndexOrThrow("observacion_cliente"))
+                val observacion = cursor.getStringOrNull(cursor.getColumnIndexOrThrow("observacion_cliente"))
 
                 val clienteObj = Cliente(id, nombre, apellido, direccion, telefono, correo, observacion)
                 listaCliente.add(clienteObj)
@@ -307,27 +277,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         cursor.close()
         // Regresar lista con todos los registros
         return listaCliente
-    }
-
-    fun buscarCliente(id: Int): Cliente? {
-        val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM cliente WHERE id_cliente = ?", arrayOf(id.toString()))
-        //crear variable de retorno
-        var cliente: Cliente? = null
-        //si existe el registro guardar los valores en la variable
-        if(cursor.moveToFirst()) {
-            val idClie = cursor.getInt(cursor.getColumnIndexOrThrow("id_cliente"))
-            val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre_cliente"))
-            val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido_cliente"))
-            val direccion = cursor.getString(cursor.getColumnIndexOrThrow("direccion_cliente"))
-            val telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono_cliente"))
-            val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo_cliente"))
-            val observacion = cursor.getString(cursor.getColumnIndexOrThrow("observacion_cliente"))
-
-            cliente = Cliente(idClie, nombre, apellido, direccion, telefono, correo, observacion)
-        }
-        cursor.close()
-        return cliente
     }
 
     fun crearCliente(nombre: String, apellido: String, direccion: String, telefono: String, correo: String, observacion: String): Boolean {
@@ -380,7 +329,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
                 val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido_empleado"))
                 val telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono_empleado"))
                 val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo_empleado"))
-
                 val empleadoObj = Empleado(id, tipoDocu, documento, nombre, apellido, telefono, correo)
                 listaEmpleado.add(empleadoObj)
             } while (cursor.moveToNext())
@@ -390,30 +338,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         return listaEmpleado
     }
 
-    fun buscarEmpleado(id: String): Empleado? {
-        val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM empleado WHERE id_empleado = ?", arrayOf(id))
-        //crear variable de retorno
-        var empleado: Empleado? = null
-        //si existe el registro guardar los valores en la variable
-        if(cursor.moveToFirst()) {
-            val idEmp = cursor.getString(cursor.getColumnIndexOrThrow("id_empleado"))
-            val tipoDocu = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoDocu"))
-            val documento = cursor.getString(cursor.getColumnIndexOrThrow("documento_empleado"))
-            val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre_empleado"))
-            val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido_empleado"))
-            val telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono_empleado"))
-            val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo_empleado"))
-
-            empleado = Empleado(idEmp, tipoDocu, documento, nombre, apellido, telefono, correo)
-        }
-        cursor.close()
-        return empleado
-    }
-
-    fun crearEmpleado(tipoDocu: Int, documento: String, nombre: String, apellido: String, telefono: String, correo: String): Boolean {
+    fun crearEmpleado(idEmpleado: String, tipoDocu: Int, documento: String, nombre: String, apellido: String, telefono: String, correo: String): Boolean {
         val db = writableDatabase
         val values = ContentValues().apply {
+            put("id_empleado", idEmpleado)
             put("id_tipoDocu", tipoDocu)
             put("documento_empleado", documento)
             put("nombre_empleado", nombre)
@@ -467,25 +395,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         cursor.close()
         // Regresar lista con todos los registros
         return listaEquipo
-    }
-
-    fun buscarEquipo(id: Int): Equipo? {
-        val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM equipo WHERE id_equipo = ?", arrayOf(id.toString()))
-        //crear variable de retorno
-        var equipo: Equipo? = null
-        //si existe el registro guardar los valores en la variable
-        if(cursor.moveToFirst()) {
-            val idEqu = cursor.getInt(cursor.getColumnIndexOrThrow("id_equipo"))
-            val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre_equipo"))
-            val lider = cursor.getString(cursor.getColumnIndexOrThrow("lider"))
-            val miembro1 = cursor.getString(cursor.getColumnIndexOrThrow("miembro1"))
-            val miembro2 = cursor.getString(cursor.getColumnIndexOrThrow("miembro2"))
-
-            equipo = Equipo(idEqu, nombre, lider, miembro1, miembro2)
-        }
-        cursor.close()
-        return equipo
     }
 
     fun crearEquipo(nombre: String, lider: String, miembro1: String, miembro2: String): Boolean {
@@ -545,30 +454,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "AMMDataBase", null
         cursor.close()
         // Regresar lista con todos los registros
         return listaServicio
-    }
-
-    fun buscarServicio(id: Int): Servicio? {
-        val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM servicio WHERE id_servicio = ?", arrayOf(id.toString()))
-        //crear variable de retorno
-        var servicio: Servicio? = null
-        //si existe el registro guardar los valores en la variable
-        if(cursor.moveToFirst()) {
-            val idServ = cursor.getInt(cursor.getColumnIndexOrThrow("id_equipo"))
-            val cliente = cursor.getInt(cursor.getColumnIndexOrThrow("id_cliente"))
-            val equipo = cursor.getInt(cursor.getColumnIndexOrThrow("id_equipo"))
-            val tipoLimpieza = cursor.getInt(cursor.getColumnIndexOrThrow("id_tipoLimp"))
-            val fecha = cursor.getString(cursor.getColumnIndexOrThrow("fecha"))
-            val hora = cursor.getString(cursor.getColumnIndexOrThrow("hora"))
-            val tiempo = cursor.getString(cursor.getColumnIndexOrThrow("tiempo"))
-            val finalizacion = cursor.getString(cursor.getColumnIndexOrThrow("finalizacion"))
-            val precio = cursor.getInt(cursor.getColumnIndexOrThrow("precio"))
-            val observacion = cursor.getString(cursor.getColumnIndexOrThrow("observacion_servicio"))
-
-            servicio = Servicio(idServ, cliente, equipo, tipoLimpieza, fecha, hora, tiempo, finalizacion, precio, observacion)
-        }
-        cursor.close()
-        return servicio
     }
 
     fun crearServicio(cliente: Int, equipo: Int, tipoLimpieza: Int, fecha: String, hora: String, tiempo: String, finalizacion: String, precio: Int, observacion: String): Boolean {

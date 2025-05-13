@@ -37,7 +37,7 @@ class RegisterActivity : ComponentActivity() {
             val contrasena = passwordForm.text.toString()
 
             if(dbHelper.registroUsuario(usuario, contrasena)) {
-                Toast.makeText(this, "Usuario ${usuario} creado exitosamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Usuario $usuario creado exitosamente", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Nombre de usuario ya existente", Toast.LENGTH_SHORT).show()
             }

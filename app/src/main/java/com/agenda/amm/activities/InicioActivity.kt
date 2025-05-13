@@ -29,7 +29,7 @@ class InicioActivity : ComponentActivity() {
             AlertDialog.Builder(this)
                 .setTitle("Cerrar sesión")
                 .setMessage("¿Esta seguro de que desea cerrar sesión")
-                .setPositiveButton("Sí") { dialog, _ ->
+                .setPositiveButton("Sí") { _, _ ->
                     //borrar sesión guardada
                     prefs.edit { clear() }
 

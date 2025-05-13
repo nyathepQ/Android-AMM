@@ -1,6 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/MainLayout">
 
+    <Button
+        android:id="@+id/btnRegresar"
+        style="@style/ButtonAmm"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_regresar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/logoImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="70dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/LogoRedondo" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        app:layout_constraintTop_toBottomOf="@id/logoImg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/clientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_border"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent">
+
+
+            <TextView
+                android:id="@+id/tittleClientes"
+                style="@style/titles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/title_clientes" />
+
+            <TextView
+                android:id="@+id/idText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/id" />
+
+            <Spinner
+                android:id="@+id/idSpinner"
+                style="@style/SpinerInputs"
+                android:layout_width="match_parent" />
+
+            <TextView
+                android:id="@+id/nombreText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/nombre" />
+
+            <EditText
+                android:id="@+id/nombreEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/nombre"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/apellidoText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/apellido" />
+
+            <EditText
+                android:id="@+id/apellidoEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/apellido"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/direccionText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/direccion" />
+
+            <EditText
+                android:id="@+id/direccionEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/direccion"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/telefonoText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/telefono" />
+
+            <EditText
+                android:id="@+id/telefonoEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/telefono"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/correoText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/correo" />
+
+            <EditText
+                android:id="@+id/correoEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/correo"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/observacionText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/observacion" />
+
+            <EditText
+                android:id="@+id/observacionEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:gravity="top|start"
+                android:hint="@string/observacion"
+                android:inputType="textMultiLine"
+                android:minLines="3" />
+
+            <LinearLayout
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/nombreEditTextLimp">
+
+                <Button
+                    android:id="@+id/btnCrear"
+                    style="@style/ButtonAmm"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/btnCrear" />
+
+                <Button
+                    android:id="@+id/btnModificar"
+                    style="@style/ButtonAmm"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/btnModificar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button1">
+
+                <Button
+                    android:id="@+id/btnMostrar"
+                    style="@style/ButtonAmm"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/btnMostrar" />
+
+                <Button
+                    android:id="@+id/btnEliminar"
+                    style="@style/ButtonAmm"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/btnEliminar" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,14 @@
 package com.agenda.amm.data.model
 
 data class Servicio (
-    val id_servicio: Int,
-    val id_cliente: Int,
-    val id_equipo: Int,
-    val id_tipoLimp: Int,
+    val idServicio: Int,
+    val idCliente: Int,
+    val idEquipo: Int,
+    val idTipoLimp: Int,
     val fecha: String,
     val hora: String,
     val tiempo: String,
     val finalizacion: String,
     val precio: Int,
-    val observacion_servicio: String
+    val observacionServicio: String?
 )

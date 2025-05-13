@@ -25,8 +25,30 @@
     <string name="title_tipo_docu">Tipo Documento</string>
     <string name="id">Código</string>
     <string name="nombre">Nombre</string>
-    <string name="btnBuscar">Buscar</string>
-    <string name="btnCrear">Crear/Modificar</string>
+    <string name="btnCrear">Crear</string>
+    <string name="btnModificar">Modificar</string>
     <string name="btnMostrar">Mostrar</string>
     <string name="btnEliminar">Eliminar</string>
+    <string name="title_clientes">Clientes</string>
+    <string name="title_empleados">Empleados</string>
+    <string name="title_equipos">Equipos</string>
+    <string name="title_servicios">Servicios</string>
+    <string name="apellido">Apellido</string>
+    <string name="direccion">Dirección</string>
+    <string name="telefono">Teléfono</string>
+    <string name="correo">Correo</string>
+    <string name="observacion">Observación</string>
+    <string name="documento">Documento</string>
+    <string name="member1">Lider</string>
+    <string name="member2">Miembro</string>
+    <string name="cliente">Cliente</string>
+    <string name="equipo">Equipo</string>
+    <string name="fecha">Fecha</string>
+    <string name="hint_fecha">DD/MM/AAAA</string>
+    <string name="hora">Hora</string>
+    <string name="hint_hora">HH:MM</string>"
+    <string name="estimado">Tiempo estimado</string>
+    <string name="finalizacion">Finalización</string>
+    <string name="precio">Valor</string>
+
 </resources>

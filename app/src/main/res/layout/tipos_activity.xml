@@ -85,13 +85,13 @@
             app:layout_constraintTop_toBottomOf="@id/nombreEditTextLimp">
 
             <Button
-                android:id="@+id/btnBuscarLimp"
-                android:text="@string/btnBuscar"
+                android:id="@+id/btnCrearLimp"
+                android:text="@string/btnCrear"
                 android:layout_marginHorizontal="5dp"
                 style="@style/ButtonAmm"/>
             <Button
-                android:id="@+id/btnCrearLimp"
-                android:text="@string/btnCrear"
+                android:id="@+id/btnModificarLimp"
+                android:text="@string/btnModificar"
                 android:layout_marginHorizontal="5dp"
                 style="@style/ButtonAmm"/>
         </LinearLayout>
@@ -175,13 +175,13 @@
             app:layout_constraintTop_toBottomOf="@id/nombreEditTextDocu">
 
             <Button
-                android:id="@+id/btnBuscarDocu"
-                android:text="@string/btnBuscar"
+                android:id="@+id/btnCrearDocu"
+                android:text="@string/btnCrear"
                 android:layout_marginHorizontal="5dp"
                 style="@style/ButtonAmm"/>
             <Button
-                android:id="@+id/btnCrearDocu"
-                android:text="@string/btnCrear"
+                android:id="@+id/btnModificarDocu"
+                android:text="@string/btnModificar"
                 android:layout_marginHorizontal="5dp"
                 style="@style/ButtonAmm"/>
         </LinearLayout>

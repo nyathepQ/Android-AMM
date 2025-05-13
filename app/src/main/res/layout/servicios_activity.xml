@@ -1,6 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/MainLayout">
 
+    <Button
+        android:id="@+id/btnRegresar"
+        style="@style/ButtonAmm"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_regresar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/logoImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="70dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/LogoRedondo" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        app:layout_constraintTop_toBottomOf="@id/logoImg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/servicios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/form_border"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent">
+
+
+            <TextView
+                android:id="@+id/tittleServicios"
+                style="@style/titles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/title_servicios" />
+
+            <TextView
+                android:id="@+id/idText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/id" />
+
+            <Spinner
+                android:id="@+id/idSpinner"
+                style="@style/SpinerInputs"
+                android:layout_width="match_parent" />
+
+            <TextView
+                android:id="@+id/clienteText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/cliente" />
+
+            <Spinner
+                android:id="@+id/clienteSpinner"
+                style="@style/SpinerInputs"
+                android:layout_width="match_parent" />
+
+            <TextView
+                android:id="@+id/equipoText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/equipo" />
+
+            <Spinner
+                android:id="@+id/equipoSpinner"
+                style="@style/SpinerInputs"
+                android:layout_width="match_parent" />
+
+            <TextView
+                android:id="@+id/tipoLimpText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/title_tipo_limp" />
+
+            <Spinner
+                android:id="@+id/tipoLimpSpinner"
+                style="@style/SpinerInputs"
+                android:layout_width="match_parent" />
+
+            <TextView
+                android:id="@+id/fechaText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/fecha" />
+
+            <EditText
+                android:id="@+id/fechaEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/hint_fecha"
+                android:inputType="date"
+                android:maxLength="10"/>
+
+            <TextView
+                android:id="@+id/horaText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/hora" />
+
+            <EditText
+                android:id="@+id/horaEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/hint_hora"
+                android:inputType="time"
+                android:maxLength="5"/>
+
+            <TextView
+                android:id="@+id/estimadoText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/estimado" />
+
+            <EditText
+                android:id="@+id/estimadoEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/hint_hora"
+                android:inputType="time"
+                android:maxLength="5"/>
+
+            <TextView
+                android:id="@+id/finalizacionText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/finalizacion" />
+
+            <EditText
+                android:id="@+id/finalizacionEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/hint_hora"
+                android:inputType="time"
+                android:maxLength="5"/>
+
+            <TextView
+                android:id="@+id/precioText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/precio" />
+
+            <EditText
+                android:id="@+id/precioEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:hint="@string/precio"
+                android:inputType="number"/>
+
+            <TextView
+                android:id="@+id/observacionText"
+                style="@style/textForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/observacion" />
+
+            <EditText
+                android:id="@+id/observacionEditText"
+                style="@style/EditTextInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:gravity="top|start"
+                android:hint="@string/observacion"
+                android:inputType="textMultiLine"
+                android:minLines="3" />
+
+            <LinearLayout
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/nombreEditTextLimp">
+
+                <Button
+                    android:id="@+id/btnCrear"
+                    style="@style/ButtonAmm"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/btnCrear" />
+
+                <Button
+                    android:id="@+id/btnModificar"
+                    style="@style/ButtonAmm"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/btnModificar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button1">
+
+                <Button
+                    android:id="@+id/btnMostrar"
+                    style="@style/ButtonAmm"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/btnMostrar" />
+
+                <Button
+                    android:id="@+id/btnEliminar"
+                    style="@style/ButtonAmm"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/btnEliminar" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
